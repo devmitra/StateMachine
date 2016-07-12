@@ -15,6 +15,12 @@
 		2E2412AF1D34FF3900EB5E9F /* StateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412AE1D34FF3900EB5E9F /* StateMachineTests.swift */; };
 		2E2412BA1D34FF3900EB5E9F /* StateMachineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412B91D34FF3900EB5E9F /* StateMachineUITests.swift */; };
 		2E2412C81D34FF5100EB5E9F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
+		2E2412D81D35185D00EB5E9F /* StateMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; };
+		2E2412DF1D35185D00EB5E9F /* StateMachineLibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412DE1D35185D00EB5E9F /* StateMachineLibTests.swift */; };
+		2E2412E11D35185D00EB5E9F /* StateMachineLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2412D11D35185D00EB5E9F /* StateMachineLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E2412E41D35185D00EB5E9F /* StateMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; };
+		2E2412E51D35185D00EB5E9F /* StateMachine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E2412ED1D35187500EB5E9F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,10 +38,45 @@
 			remoteGlobalIDString = 2E2412951D34FF3800EB5E9F;
 			remoteInfo = StateMachine;
 		};
+		2E2412D91D35185D00EB5E9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E24128E1D34FF3800EB5E9F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E2412CE1D35185D00EB5E9F;
+			remoteInfo = StateMachineLib;
+		};
+		2E2412DB1D35185D00EB5E9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E24128E1D34FF3800EB5E9F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E2412951D34FF3800EB5E9F;
+			remoteInfo = StateMachine;
+		};
+		2E2412E21D35185D00EB5E9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E24128E1D34FF3800EB5E9F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E2412CE1D35185D00EB5E9F;
+			remoteInfo = StateMachineLib;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2E2412EB1D35185D00EB5E9F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2E2412E51D35185D00EB5E9F /* StateMachine.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		2E2412961D34FF3900EB5E9F /* StateMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StateMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2412961D34FF3900EB5E9F /* StateMachineApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StateMachineApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2412991D34FF3900EB5E9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E24129B1D34FF3900EB5E9F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2E24129E1D34FF3900EB5E9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +91,12 @@
 		2E2412BB1D34FF3900EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2412C71D34FF5100EB5E9F /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		2E2412C91D35061A00EB5E9F /* StateMachine.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StateMachine.playground; sourceTree = "<group>"; };
+		2E2412CF1D35185D00EB5E9F /* StateMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StateMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2412D11D35185D00EB5E9F /* StateMachineLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StateMachineLib.h; sourceTree = "<group>"; };
+		2E2412D21D35185D00EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E2412D71D35185D00EB5E9F /* StateMachineLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StateMachineLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2412DE1D35185D00EB5E9F /* StateMachineLibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachineLibTests.swift; sourceTree = "<group>"; };
+		2E2412E01D35185D00EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E2412E41D35185D00EB5E9F /* StateMachine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +122,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2E2412CB1D35185D00EB5E9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E2412D41D35185D00EB5E9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E2412D81D35185D00EB5E9F /* StateMachine.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,6 +146,8 @@
 				2E2412981D34FF3900EB5E9F /* StateMachine */,
 				2E2412AD1D34FF3900EB5E9F /* StateMachineTests */,
 				2E2412B81D34FF3900EB5E9F /* StateMachineUITests */,
+				2E2412D01D35185D00EB5E9F /* StateMachineLib */,
+				2E2412DD1D35185D00EB5E9F /* StateMachineLibTests */,
 				2E2412971D34FF3900EB5E9F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,9 +155,11 @@
 		2E2412971D34FF3900EB5E9F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2E2412961D34FF3900EB5E9F /* StateMachine.app */,
+				2E2412961D34FF3900EB5E9F /* StateMachineApp.app */,
 				2E2412AA1D34FF3900EB5E9F /* StateMachineTests.xctest */,
 				2E2412B51D34FF3900EB5E9F /* StateMachineUITests.xctest */,
+				2E2412CF1D35185D00EB5E9F /* StateMachine.framework */,
+				2E2412D71D35185D00EB5E9F /* StateMachineLibTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,24 +197,55 @@
 			path = StateMachineUITests;
 			sourceTree = "<group>";
 		};
+		2E2412D01D35185D00EB5E9F /* StateMachineLib */ = {
+			isa = PBXGroup;
+			children = (
+				2E2412D11D35185D00EB5E9F /* StateMachineLib.h */,
+				2E2412D21D35185D00EB5E9F /* Info.plist */,
+			);
+			path = StateMachineLib;
+			sourceTree = "<group>";
+		};
+		2E2412DD1D35185D00EB5E9F /* StateMachineLibTests */ = {
+			isa = PBXGroup;
+			children = (
+				2E2412DE1D35185D00EB5E9F /* StateMachineLibTests.swift */,
+				2E2412E01D35185D00EB5E9F /* Info.plist */,
+			);
+			path = StateMachineLibTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		2E2412CC1D35185D00EB5E9F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E2412E11D35185D00EB5E9F /* StateMachineLib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		2E2412951D34FF3800EB5E9F /* StateMachine */ = {
+		2E2412951D34FF3800EB5E9F /* StateMachineApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2E2412BE1D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachine" */;
+			buildConfigurationList = 2E2412BE1D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineApp" */;
 			buildPhases = (
 				2E2412921D34FF3800EB5E9F /* Sources */,
 				2E2412931D34FF3800EB5E9F /* Frameworks */,
 				2E2412941D34FF3800EB5E9F /* Resources */,
+				2E2412EB1D35185D00EB5E9F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2E2412E31D35185D00EB5E9F /* PBXTargetDependency */,
 			);
-			name = StateMachine;
+			name = StateMachineApp;
 			productName = StateMachine;
-			productReference = 2E2412961D34FF3900EB5E9F /* StateMachine.app */;
+			productReference = 2E2412961D34FF3900EB5E9F /* StateMachineApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2E2412A91D34FF3900EB5E9F /* StateMachineTests */ = {
@@ -186,6 +284,43 @@
 			productReference = 2E2412B51D34FF3900EB5E9F /* StateMachineUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		2E2412CE1D35185D00EB5E9F /* StateMachine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E2412EA1D35185D00EB5E9F /* Build configuration list for PBXNativeTarget "StateMachine" */;
+			buildPhases = (
+				2E2412CA1D35185D00EB5E9F /* Sources */,
+				2E2412CB1D35185D00EB5E9F /* Frameworks */,
+				2E2412CC1D35185D00EB5E9F /* Headers */,
+				2E2412CD1D35185D00EB5E9F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StateMachine;
+			productName = StateMachineLib;
+			productReference = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2E2412D61D35185D00EB5E9F /* StateMachineLibTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E2412EC1D35185D00EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineLibTests" */;
+			buildPhases = (
+				2E2412D31D35185D00EB5E9F /* Sources */,
+				2E2412D41D35185D00EB5E9F /* Frameworks */,
+				2E2412D51D35185D00EB5E9F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2E2412DA1D35185D00EB5E9F /* PBXTargetDependency */,
+				2E2412DC1D35185D00EB5E9F /* PBXTargetDependency */,
+			);
+			name = StateMachineLibTests;
+			productName = StateMachineLibTests;
+			productReference = 2E2412D71D35185D00EB5E9F /* StateMachineLibTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -210,6 +345,15 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2E2412951D34FF3800EB5E9F;
 					};
+					2E2412CE1D35185D00EB5E9F = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					2E2412D61D35185D00EB5E9F = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2E2412951D34FF3800EB5E9F;
+					};
 				};
 			};
 			buildConfigurationList = 2E2412911D34FF3800EB5E9F /* Build configuration list for PBXProject "StateMachine" */;
@@ -225,9 +369,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2E2412951D34FF3800EB5E9F /* StateMachine */,
+				2E2412951D34FF3800EB5E9F /* StateMachineApp */,
 				2E2412A91D34FF3900EB5E9F /* StateMachineTests */,
 				2E2412B41D34FF3900EB5E9F /* StateMachineUITests */,
+				2E2412CE1D35185D00EB5E9F /* StateMachine */,
+				2E2412D61D35185D00EB5E9F /* StateMachineLibTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +397,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2E2412B31D34FF3900EB5E9F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E2412CD1D35185D00EB5E9F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E2412D51D35185D00EB5E9F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,18 +446,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2E2412CA1D35185D00EB5E9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E2412ED1D35187500EB5E9F /* StateMachine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E2412D31D35185D00EB5E9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E2412DF1D35185D00EB5E9F /* StateMachineLibTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		2E2412AC1D34FF3900EB5E9F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2E2412951D34FF3800EB5E9F /* StateMachine */;
+			target = 2E2412951D34FF3800EB5E9F /* StateMachineApp */;
 			targetProxy = 2E2412AB1D34FF3900EB5E9F /* PBXContainerItemProxy */;
 		};
 		2E2412B71D34FF3900EB5E9F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2E2412951D34FF3800EB5E9F /* StateMachine */;
+			target = 2E2412951D34FF3800EB5E9F /* StateMachineApp */;
 			targetProxy = 2E2412B61D34FF3900EB5E9F /* PBXContainerItemProxy */;
+		};
+		2E2412DA1D35185D00EB5E9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E2412CE1D35185D00EB5E9F /* StateMachine */;
+			targetProxy = 2E2412D91D35185D00EB5E9F /* PBXContainerItemProxy */;
+		};
+		2E2412DC1D35185D00EB5E9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E2412951D34FF3800EB5E9F /* StateMachineApp */;
+			targetProxy = 2E2412DB1D35185D00EB5E9F /* PBXContainerItemProxy */;
+		};
+		2E2412E31D35185D00EB5E9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E2412CE1D35185D00EB5E9F /* StateMachine */;
+			targetProxy = 2E2412E21D35185D00EB5E9F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -413,6 +604,7 @@
 		2E2412BF1D34FF3900EB5E9F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StateMachine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -425,6 +617,7 @@
 		2E2412C01D34FF3900EB5E9F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StateMachine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -484,6 +677,70 @@
 			};
 			name = Release;
 		};
+		2E2412E61D35185D00EB5E9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = StateMachineLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachineLib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2E2412E71D35185D00EB5E9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = StateMachineLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachineLib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2E2412E81D35185D00EB5E9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = StateMachineLibTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachineLibTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StateMachine.app/StateMachine";
+			};
+			name = Debug;
+		};
+		2E2412E91D35185D00EB5E9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = StateMachineLibTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachineLibTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StateMachine.app/StateMachine";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -496,13 +753,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2E2412BE1D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachine" */ = {
+		2E2412BE1D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2E2412BF1D34FF3900EB5E9F /* Debug */,
 				2E2412C01D34FF3900EB5E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E2412C11D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineTests" */ = {
 			isa = XCConfigurationList;
@@ -511,12 +769,30 @@
 				2E2412C31D34FF3900EB5E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E2412C41D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2E2412C51D34FF3900EB5E9F /* Debug */,
 				2E2412C61D34FF3900EB5E9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2E2412EA1D35185D00EB5E9F /* Build configuration list for PBXNativeTarget "StateMachine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E2412E61D35185D00EB5E9F /* Debug */,
+				2E2412E71D35185D00EB5E9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2E2412EC1D35185D00EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineLibTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E2412E81D35185D00EB5E9F /* Debug */,
+				2E2412E91D35185D00EB5E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
