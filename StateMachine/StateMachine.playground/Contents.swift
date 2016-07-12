@@ -1,6 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
+import StateMachine
 
 enum Events : String, EventDescriptor {
     case One,Two
@@ -12,14 +13,14 @@ enum States : String, StateIdentifier {
 
 class StateX : State<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?, _ completion: Completion) {
-        print("State X ----- Proccessing Event : \(event)")
+        print("State X ----- Processing Event : \(event)")
         completion(next: States.Y, store: nil)
     }
 }
 
 class StateY : State<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?, _ completion: Completion) {
-        print("State Y ----- Proccessing Event : \(event)")
+        print("State Y ----- Processing Event : \(event)")
         completion(next: States.X, store: nil)
     }
 }
