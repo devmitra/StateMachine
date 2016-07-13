@@ -2,6 +2,12 @@
 
 import UIKit
 import StateMachine
+//import XCPlayground
+import PlaygroundSupport
+
+PlaygroundPage.current.needsIndefiniteExecution = true
+//XCPlaygroundPage.currentPage.needsIndefiniteExecution = true
+
 
 enum Events : String, EventDescriptor {
     case One,Two
@@ -32,8 +38,30 @@ let y: StateY = StateY(state: .Y)
 stateMachine.addState(x)
 stateMachine.addState(y)
 
+let handle: StateObservationHandle = stateMachine.addChangeObserver { (e,p,n,_) in
+    print("Get observation \(e) --- \(p) --- \(n)")
+}
+
+class Observer {
+    @objc func notificationHandle(notification: Notification) {
+        print("Get notification")
+        if let stmac: StateMachine<States,[String : Any], Events> = notification.userInfo?[StateMachineKey] as? StateMachine<States,[String : Any], Events> {
+            
+            print("\(stmac)")
+        }
+        
+    }
+}
+
+let observer: Observer = Observer()
+
+NotificationCenter.default.addObserver(observer, selector: #selector(Observer.notificationHandle), name:Notification.Name(StateMachineChangeNotification), object: nil)
+
 try! stateMachine.start(state: .X)
 
 stateMachine.handleEvent(.One, nil)
-print("gap")
 stateMachine.handleEvent(.Two, nil)
+
+handle.remove()
+
+stateMachine.handleEvent(.One, nil)
