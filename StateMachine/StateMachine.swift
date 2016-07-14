@@ -8,6 +8,14 @@
 
 import Foundation
 
+/*:
+ # State Machine: Tutorial
+ State machine is excelent concept of application development. Here whole application is composed into
+ serveral unique states which is represented by state variable,(i.e. Store). Events triggered state transition. StateMachine framework provides excelent development tool to develop application based on state machine. This Swift (3.0) framework is a generic reusable code component. Generic represenattion of Event, StateIdentifier or StateName and State behavior can be achived through this frame work.
+ 
+ #### Please build StateMachine project to run this tutorial 
+ */
+
 /**
  # State Machine Notification
  */
@@ -46,12 +54,15 @@ public protocol StateIdentifier: RawRepresentable, Hashable {
     init?(rawValue: String)
 }
 
+public typealias StateNames = StateIdentifier
+
 
 /**
  # State
  Structural And Behavioral Structure of States in State Machine. Basically states is behavioral represenation of state.
  1. Handle state operation As per events
  2. Update state variable or store
+ 3. Only applicable to the state machine with same type
  */
 public class State<S: StateIdentifier,St, E: EventDescriptor>  {
     public typealias StateId = S
@@ -87,7 +98,7 @@ public enum StateMachineError: ErrorProtocol {
     case StartError, MachineError
 }
 
-// Observation handler for state machine observation
+//: Observation handler for state machine observation
 struct StateMachineObservationHandle<T> : StateObservationHandle {
     var key: T?
     var removeClosure: ((T?) -> Void)?
@@ -104,12 +115,14 @@ struct StateMachineObservationHandle<T> : StateObservationHandle {
  # State Machine
  A state machine is collection of states of application and a store which is container of state variables. State machine handle a event and moves to next state.
  1. Container of states
- 2. Handle Events
- 3. Store state variables
- 4. Store Event History
- 5. Store State Transition
+ 2. Handle Events: a genric event type conforing to EventDescription
+ 3. Accepts States with type same as own Event, StateName and Store type
+ 5. Perform state transition based on event handling by current state
+ 6. Store state variables
+ 7. Store Event History
+ 8. Store State Transition
  */
-public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescriptor>: CustomStringConvertible {
+public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: CustomStringConvertible {
     
     
     public typealias StateObj = State<StateId,Store,Event>
@@ -123,6 +136,11 @@ public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescripto
      Stored property to hold state variables
      */
     public var store: Store?
+    
+    /*!
+     ### OperationQuue
+     */
+    internal var queue: OperationQueue?
     
     // Variables
     // Internal setter, public getter
@@ -143,15 +161,29 @@ public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescripto
     // Event completion function
     internal func completion(next: StateId, store: Any?) {
         //print("Complete ---- next \(next)")
-        processing = false
-        if self.currentState != next {
-            self.storeCurrentStateToHistory()
-            currentState = next
-            if let  s: Store = store as? Store {
-                self.store = s
+        if let q: OperationQueue = self.queue {
+            q.addOperation({ [weak self] in
+                self?.processing = false
+                if self?.currentState != next {
+                    self?.storeCurrentStateToHistory()
+                    self?.currentState = next
+                    if let  s: Store = store as? Store {
+                        self?.store = s
+                    }
+                    self?.sendChangeNotification(self?.previuosState, next)
+                }
+            })
+        }
+        else {
+            processing = false
+            if self.currentState != next {
+                self.storeCurrentStateToHistory()
+                currentState = next
+                if let  s: Store = store as? Store {
+                    self.store = s
+                }
+                sendChangeNotification(self.previuosState, next)
             }
-            
-            sendChangeNotification(self.previuosState, next)
         }
     }
     
@@ -169,7 +201,13 @@ public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescripto
         }
     }
     
+    // ### Default constrructor
     public init() {}
+    
+    // ### Constructor with operationQueue
+    public init(queue: OperationQueue) {
+        self.queue = queue
+    }
     
     /**
      ### previousState
@@ -183,6 +221,10 @@ public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescripto
         }
     }
     
+    /**
+     ### lastEvent
+            Last event processed by SM
+    */
     public var lastEvent: Event? {
         if historyEvents.count > 0 {
             return historyEvents.last
@@ -204,7 +246,7 @@ public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescripto
     
     /*!
      ### addState (State)
-     Adding a new state State object based operation to StateMachine
+     Adding a new state State object based operation to StateMachine. Only State of type Event,StateName and Store is accepted.
      */
     public func addState(_ configuration: State<StateId,Store,Event>) {
         if let stid : StateId = configuration.state {
@@ -221,31 +263,54 @@ public class StateMachine <StateId: StateIdentifier,Store, Event: EventDescripto
             //print("processing")
             return !processing
         }
+        
         if let current: StateId = self.currentState, handle = states[current] {
+            var accepted: Bool = false
             //print("get handel for \(currentState)")
-            let count1 = historyEvents.count
             if let state: StateObj = handle as? StateObj {
                 processing =  true
-                historyEvents.append(event)
-                state.operation(event, self.store, { [weak self](next, store) in
-                    self?.completion(next: next, store: store)
+                accepted = true
+                if let q: OperationQueue = self.queue {
+                    historyEvents.append(event)
+                    q.addOperation({ 
+                        state.operation(event, self.store, { [weak self](next, store) in
+                            self?.completion(next: next, store: store)
+                            })
                     })
+                }
+                else {
+                    historyEvents.append(event)
+                    state.operation(event, self.store, { [weak self](next, store) in
+                        self?.completion(next: next, store: store)
+                        })
+                }
+                
+                
             }
             else if let action: StateAction = handle as? StateAction {
                 processing = true
-                historyEvents.append(event)
-                action(event, self.store, {[weak self] (next, store) in
-                    self?.completion(next: next, store: store)
-                })
+                accepted = true
+                if let q: OperationQueue = self.queue {
+                    historyEvents.append(event)
+                    q.addOperation({
+                        action(event, self.store, {[weak self] (next, store) in
+                            self?.completion(next: next, store: store)
+                            })
+                    })
+                }
+                else {
+                    action(event, self.store, {[weak self] (next, store) in
+                        self?.completion(next: next, store: store)
+                        })
+                }
             }
             else {
+                accepted = false
                 processing = false
             }
             
             //print(" \(count1) : \(historyEvents.count)")
-            if count1 != historyEvents.count {
-                return true
-            }
+           return accepted
         }
         else {
             processing = false
