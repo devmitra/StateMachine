@@ -3,7 +3,7 @@
 //  StateMachine
 //
 //  Created by Pushan Mitra on 12/07/16.
-//  Copyright © 2016 IBM INDIA PVT LTD And Pushan Mitra. All rights reserved.
+//  Copyright © 2016 Pushan Mitra. All rights reserved.
 //
 
 import Foundation
