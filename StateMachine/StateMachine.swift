@@ -213,12 +213,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
      ### previousState
      */
     public var previuosState : StateId? {
-        if historyStates.count > 0 {
-            return historyStates.last
-        }
-        else {
-            return nil
-        }
+        return historyStates.last
     }
     
     /**
@@ -226,12 +221,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
             Last event processed by SM
     */
     public var lastEvent: Event? {
-        if historyEvents.count > 0 {
-            return historyEvents.last
-        }
-        else {
-            return nil
-        }
+        return historyEvents.last
     }
     
     /*!
