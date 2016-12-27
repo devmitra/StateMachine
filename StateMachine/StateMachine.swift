@@ -41,7 +41,7 @@ public extension EventDescriptor {
             return s
         }
         else {
-            return "\(self.dynamicType)"
+            return "\(type(of: self))"
         }
     }
 }
@@ -64,21 +64,21 @@ public typealias StateNames = StateIdentifier
  2. Update state variable or store
  3. Only applicable to the state machine with same type
  */
-public class State<S: StateIdentifier,St, E: EventDescriptor>  {
+open class State<S: StateIdentifier,St, E: EventDescriptor>  {
     public typealias StateId = S
     public typealias Store = St
     public typealias Event  = E
     
-    internal var state: StateId
+    internal var state: StateId?
     
-    public typealias Completion = (next : StateId, store: Store?) -> Void
+    public typealias Completion = (_ next : StateId, _ store: Store?) -> Void
     
-    public var identifier: String {
-        if let s: String = self.state.rawValue as? String {
+    open var identifier: String {
+        if let s: String = self.state?.rawValue as? String {
             return s
         }
         else {
-            return "\(self.dynamicType)"
+            return "\(type(of: self))"
         }
     }
     
@@ -86,7 +86,7 @@ public class State<S: StateIdentifier,St, E: EventDescriptor>  {
         self.state = state
     }
     
-    public func operation(_ event: State.Event, _ store: State.Store?, _ completion: Completion) {
+    open func operation(_ event: State.Event, _ store: State.Store?, _ completion: Completion) {
         
     }
     
@@ -94,7 +94,7 @@ public class State<S: StateIdentifier,St, E: EventDescriptor>  {
 }
 
 
-public enum StateMachineError: ErrorProtocol {
+public enum StateMachineError: Error {
     case StartError, MachineError
 }
 
@@ -115,14 +115,14 @@ struct StateMachineObservationHandle<T> : StateObservationHandle {
  # State Machine
  A state machine is collection of states of application and a store which is container of state variables. State machine handle a event and moves to next state.
  1. Container of states
- 2. Handle Events: a genric event type conforing to EventDescription
+ 2. Handle Events: a genric event type conforming to EventDescription
  3. Accepts States with type same as own Event, StateName and Store type
  5. Perform state transition based on event handling by current state
  6. Store state variables
  7. Store Event History
  8. Store State Transition
  */
-public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: CustomStringConvertible {
+open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: CustomStringConvertible {
     
     
     public typealias StateObj = State<StateId,Store,Event>
@@ -135,16 +135,16 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
      ### Store
      Stored property to hold state variables
      */
-    public var store: Store?
+    open var store: Store?
     
-    /*!
+    /*:
      ### OperationQuue
      */
     internal var queue: OperationQueue?
     
     // Variables
-    // Internal setter, public getter
-    internal(set) public var currentState: StateId?
+    // Internal setter, open getter
+    internal(set) open var currentState: StateId?
     
     internal var historyStates: [StateId] = [StateId]()
     internal var historyEvents: [Event] = [Event]()
@@ -191,7 +191,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
     internal var states: [StateId : Any] = [StateId : Any]()
     
     internal func sendChangeNotification(_ previous: StateId?,_ next: StateId) {
-        let uinfo:[NSObject : AnyObject] = [StateMachineKey: self]
+        let uinfo:[NSObject : AnyObject] = [StateMachineKey as NSObject: self]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: StateMachineChangeNotification), object: nil, userInfo: uinfo)
         
         for (_,obsv) in observers {
@@ -212,7 +212,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
     /**
      ### previousState
      */
-    public var previuosState : StateId? {
+    open var previuosState : StateId? {
         return historyStates.last
     }
     
@@ -220,7 +220,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
      ### lastEvent
             Last event processed by SM
     */
-    public var lastEvent: Event? {
+    open var lastEvent: Event? {
         return historyEvents.last
     }
     
@@ -228,7 +228,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
      ### addState (Action)
      Adding a new state Closure based action to StateMachine
      */
-    public func addState (_ state: StateId, _ item : Any) {
+    open func addState (_ state: StateId, _ item : Any) {
         if  item is StateAction {
             states[state] = item
         }
@@ -238,7 +238,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
      ### addState (State)
      Adding a new state State object based operation to StateMachine. Only State of type Event,StateName and Store is accepted.
      */
-    public func addState(_ configuration: State<StateId,Store,Event>) {
+    open func addState(_ configuration: State<StateId,Store,Event>) {
         if let stid : StateId = configuration.state {
             states[stid] = configuration
         }
@@ -248,13 +248,13 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
      ### handleEvent
      Handling event associated with application.
      */
-    public func handleEvent(_ event: Event,_ data: Any?) -> Bool {
+    open func handleEvent(_ event: Event,_ data: Any?) -> Bool {
         if processing {
             //print("processing")
             return !processing
         }
         
-        if let current: StateId = self.currentState, handle = states[current] {
+        if let current: StateId = self.currentState, let handle = states[current] {
             var accepted: Bool = false
             //print("get handel for \(currentState)")
             if let state: StateObj = handle as? StateObj {
@@ -308,7 +308,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
         return processing
     }
     
-    public func start(state : StateId) throws -> Bool  {
+    open func start(state : StateId) throws -> Bool  {
         if let _ = currentState {
             return false
         }
@@ -320,7 +320,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
         observers.removeValue(forKey: key)
     }
     
-    public func addChangeObserver(_ observer: ChangeObserver) -> StateObservationHandle {
+    open func addChangeObserver(_ observer: @escaping ChangeObserver) -> StateObservationHandle {
         let count = observerCount
         observerCount += 1
         observers[count] = observer
@@ -333,7 +333,7 @@ public class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: C
         return handle
     }
     
-    public var description: String {
-        return "[State Machine: <\(self.dynamicType)> , current: \(self.currentState) , previous: \(self.previuosState), last event: \(self.lastEvent), total states: \(self.states.count)]"
+    open var description: String {
+        return "[State Machine: <\(type(of: self))> , current: \(self.currentState) , previous: \(self.previuosState), last event: \(self.lastEvent), total states: \(self.states.count)]"
     }
 }

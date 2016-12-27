@@ -33,14 +33,14 @@ enum States : String, StateNames {
 class StateX : State<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?, _ completion: Completion) {
         print("State X ----- Processing Event : \(event)")
-        completion(next: States.Y, store: nil)
+        completion(States.Y, nil)
     }
 }
 
 class StateY : State<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?, _ completion: Completion) {
         print("State Y ----- Processing Event : \(event)")
-        completion(next: States.X, store: nil)
+        completion(States.X, nil)
     }
 }
 
@@ -129,13 +129,13 @@ stateMachine.handleEvent(.One, nil)
 
 //: #### Checking async behavior
 let timeInSec = 1.0
-DispatchQueue.main.after(when: .now() + timeInSec) {
+DispatchQueue.main.asyncAfter(deadline: .now() + timeInSec) {
     // your function here
     let _ = stateMachine.handleEvent(.Two, nil)
     
     handle.remove()
     let timeInSec = 1.0
-    DispatchQueue.main.after(when: .now() + timeInSec) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + timeInSec) {
         // your function here
         let _ = stateMachine.handleEvent(.Three, nil)
     }
