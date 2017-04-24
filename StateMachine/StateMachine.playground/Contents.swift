@@ -31,14 +31,14 @@ enum States : String, StateNames {
 
 // State : State behavior controller composed with type Events and States and it is applicable to same kind of state machine.
 class StateX : State<States,[String: Any],Events> {
-    override func operation(_ event: Events, _ store: [String : Any]?, _ completion: Completion) {
+    override func operation(_ event: Events, _ store: [String : Any]?,_ data: Any?, _ completion: Completion) {
         print("State X ----- Processing Event : \(event)")
         completion(States.Y, nil)
     }
 }
 
 class StateY : State<States,[String: Any],Events> {
-    override func operation(_ event: Events, _ store: [String : Any]?, _ completion: Completion) {
+    override func operation(_ event: Events, _ store: [String : Any]?,_ data: Any?, _ completion: Completion) {
         print("State Y ----- Processing Event : \(event)")
         completion(States.X, nil)
     }
@@ -65,7 +65,7 @@ stateMachineSync.addState(y)
 
 //:  Adding handle
 let handleSyncStateMachine: StateObservationHandle = stateMachineSync.addChangeObserver { (e,p,n,_) in
-    print("Get observation sync \(e) --- \(p) --- \(n)")
+    print("Get observation sync \(e) --- \(String(describing: p)) --- \(n)")
 }
 
 //:  Starting machine with state X
@@ -94,7 +94,7 @@ stateMachine.addState(y)
 
 //: Create Observation and notification
 let handle: StateObservationHandle = stateMachine.addChangeObserver { (e,p,n,_) in
-    print("Get observation \(e) --- \(p) --- \(n)")
+    print("Get observation \(e) --- \(String(describing: p)) --- \(n)")
 }
 
 class Observer {

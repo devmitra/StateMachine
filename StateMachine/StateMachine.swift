@@ -86,7 +86,7 @@ open class State<S: StateIdentifier,St, E: EventDescriptor>  {
         self.state = state
     }
     
-    open func operation(_ event: State.Event, _ store: State.Store?, _ completion: Completion) {
+    open func operation(_ event: State.Event, _ store: State.Store?,_ data: Any? , _ completion: Completion) {
         
     }
     
@@ -111,6 +111,10 @@ struct StateMachineObservationHandle<T> : StateObservationHandle {
     }
     
 }
+
+
+
+
 /*:
  # State Machine
  A state machine is collection of states of application and a store which is container of state variables. State machine handle a event and moves to next state.
@@ -126,8 +130,13 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     
     
     public typealias StateObj = State<StateId,Store,Event>
-    public typealias StateAction = (Event,Store?,State<StateId,Store,Event>.Completion) -> Void
+    public typealias StateAction = (Event,Store?,Any?,State<StateId,Store,Event>.Completion) -> Void
     public typealias ChangeObserver = (Event,StateId?,StateId,Store?) -> Void
+    
+    //: Hitory Tuple for state
+    public typealias StateHistory = (state: StateId,time: Date);
+    //: History Events
+    public typealias EventHistory = (event:Event, time:Date);
     
     
     
@@ -146,8 +155,8 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     // Internal setter, open getter
     internal(set) open var currentState: StateId?
     
-    internal var historyStates: [StateId] = [StateId]()
-    internal var historyEvents: [Event] = [Event]()
+    internal var historyStates: [StateHistory] = [StateHistory]()
+    internal var historyEvents: [EventHistory] = [EventHistory]()
     internal var observers: [Int : ChangeObserver] = [Int : ChangeObserver]()
     internal var observerCount: Int = 0
     internal var processing: Bool = false
@@ -155,7 +164,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     // Storing current State to history
     internal func storeCurrentStateToHistory() {
         if let c = self.currentState {
-            historyStates.append(c)
+            historyStates.append((c, Date()))
         }
     }
     // Event completion function
@@ -213,7 +222,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
      ### previousState
      */
     open var previuosState : StateId? {
-        return historyStates.last
+        return historyStates.last?.state
     }
     
     /**
@@ -221,7 +230,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
             Last event processed by SM
     */
     open var lastEvent: Event? {
-        return historyEvents.last
+        return historyEvents.last?.event
     }
     
     /*!
@@ -254,25 +263,25 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
             return !processing
         }
         
-        if let current: StateId = self.currentState, let handle = states[current] {
+        if let current: StateId = self.currentState,let handle = states[current] {
             var accepted: Bool = false
             //print("get handel for \(currentState)")
             if let state: StateObj = handle as? StateObj {
                 processing =  true
                 accepted = true
                 if let q: OperationQueue = self.queue {
-                    historyEvents.append(event)
+                    historyEvents.append((event, Date()))
                     q.addOperation({ 
-                        state.operation(event, self.store, { [weak self](next, store) in
+                        state.operation(event, self.store, data ,{ [weak self](next, store) in
                             self?.completion(next: next, store: store)
                             })
                     })
                 }
                 else {
-                    historyEvents.append(event)
-                    state.operation(event, self.store, { [weak self](next, store) in
+                    historyEvents.append((event, Date()))
+                    state.operation(event, self.store, data, { [weak self](next, store) in
                         self?.completion(next: next, store: store)
-                        })
+                    })
                 }
                 
                 
@@ -281,17 +290,18 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                 processing = true
                 accepted = true
                 if let q: OperationQueue = self.queue {
-                    historyEvents.append(event)
+                    historyEvents.append((event, Date()))
                     q.addOperation({
-                        action(event, self.store, {[weak self] (next, store) in
+                        action(event, self.store, data, {[weak self] (next, store) in
                             self?.completion(next: next, store: store)
-                            })
+                        })
                     })
                 }
                 else {
-                    action(event, self.store, {[weak self] (next, store) in
+                    historyEvents.append((event, Date()))
+                    action(event, self.store, data, {[weak self] (next, store) in
                         self?.completion(next: next, store: store)
-                        })
+                    })
                 }
             }
             else {
@@ -334,6 +344,10 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     }
     
     open var description: String {
-        return "[State Machine: <\(type(of: self))> , current: \(self.currentState) , previous: \(self.previuosState), last event: \(self.lastEvent), total states: \(self.states.count)]"
+        return "[State Machine: <\(type(of: self))> , current: \(String(describing: self.currentState)) , previous: \(String(describing: self.previuosState)), last event: \(String(describing: self.lastEvent)), total states: \(self.states.count)]"
+    }
+    
+    open func showHistory() -> Void {
+       
     }
 }
