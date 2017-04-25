@@ -90,6 +90,10 @@ open class State<S: StateIdentifier,St, E: EventDescriptor>  {
         
     }
     
+    open func possibleNextStates() -> [StateId]? {
+        return nil
+    }
+    
     
 }
 
@@ -345,6 +349,23 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     
     open var description: String {
         return "[State Machine: <\(type(of: self))> , current: \(String(describing: self.currentState)) , previous: \(String(describing: self.previuosState)), last event: \(String(describing: self.lastEvent)), total states: \(self.states.count)]"
+    }
+    
+    public var stateDiagram: String {
+        var stateDiagram: String = "{State Machine}"
+        for (stid , st) in self.states {
+            print("1")
+            if let state = st as? State<StateId, Store, Event>, let next: [StateId] = state.possibleNextStates() {
+                stateDiagram.append("\n\t[\(stid)] ")
+                for nextState in next {
+                    stateDiagram.append("\n\t| -----> [\(nextState)]")
+                }
+            }
+        }
+        
+        stateDiagram.append("\n{State Machine}")
+        
+        return stateDiagram
     }
     
     open func showHistory() -> Void {

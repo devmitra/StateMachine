@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import StateMachineLib
+//import StateMachineLib
 
 class StateMachineLibTests: XCTestCase {
     

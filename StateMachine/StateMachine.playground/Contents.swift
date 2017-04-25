@@ -35,12 +35,20 @@ class StateX : State<States,[String: Any],Events> {
         print("State X ----- Processing Event : \(event)")
         completion(States.Y, nil)
     }
+    
+    override func possibleNextStates() -> [States]? {
+        return [States.Y,.Z]
+    }
 }
 
 class StateY : State<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?,_ data: Any?, _ completion: Completion) {
         print("State Y ----- Processing Event : \(event)")
         completion(States.X, nil)
+    }
+    
+    override func possibleNextStates() -> [States]? {
+        return [States.X]
     }
 }
 
@@ -62,6 +70,8 @@ let stateMachineSync : StateMachine<States,[String : Any], Events> = StateMachin
 //:  Adding states
 stateMachineSync.addState(x)
 stateMachineSync.addState(y)
+
+print("\(stateMachineSync.stateDiagram)")
 
 //:  Adding handle
 let handleSyncStateMachine: StateObservationHandle = stateMachineSync.addChangeObserver { (e,p,n,_) in
