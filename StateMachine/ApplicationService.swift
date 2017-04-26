@@ -13,6 +13,7 @@ typealias EditTodoTuple = (index: Int, value: String)
 
 class Store {
     var list: [String] = [String]()
+    var seletedTodoItem: Int = -1
 }
 
 var applicationStore: Store = Store()
@@ -32,7 +33,8 @@ enum Event: String, EventDescriptor {
 class StateInit: State<StateValue,Store,Event> {
     override func operation(_ event: Event, _ store: Store?, _ data: Any?, _ completion: (StateValue, Store?) -> Void) {
         if event == .Start {
-            completion(.ViewTodo, applicationStore)
+            //applicationStore.list.append("add todo item by pressing +")
+            completion(.ViewTodoList, applicationStore)
         }
         else {
             print("Unaccepted Event: \(event)")
@@ -55,11 +57,20 @@ class StateViewTodoList: State<StateValue,Store,Event> {
                 appStore.list.append("Add new todo item")
                 completion(.ViewTodoList, store)
             case .RemoveTodo:
-                if appStore.list.count > 0, let index: Int = data as? Int, index < appStore.list.count, index >= 0 {
+                if appStore.list.count > 0, let index: Int = data as? Int,
+                    index < appStore.list.count,
+                    index >= 0 {
                     appStore.list.remove(at: index)
                 }
                 completion(.ViewTodoList, store)
             case .ViewTodo:
+                if let index: Int = data as? Int,
+                    index < appStore.list.count,
+                    index >= 0 {
+                    
+                    appStore.seletedTodoItem = index
+                    
+                }
                 completion(.ViewTodo, store)
             default:
                 completion(.ViewTodoList, store)
@@ -77,10 +88,12 @@ class StateViewTodo: State<StateValue,Store,Event> {
         if let appStore: Store = store {
             switch event {
             case .EditTodo:
-                if let updateVal: EditTodoTuple = data as? EditTodoTuple, updateVal.index >= 0, updateVal.index < appStore.list.count {
-                    
+                if appStore.seletedTodoItem != -1, let update: String = data as? String {
+                    appStore.list[appStore.seletedTodoItem] = update
                 }
+                completion(.ViewTodo, appStore)
             case .BackToList:
+                appStore.seletedTodoItem = -1
                 completion(.ViewTodoList, store)
             default:
                 completion(.ViewTodo, store)
@@ -93,15 +106,62 @@ class StateViewTodo: State<StateValue,Store,Event> {
     }
 }
 
+extension NSObject {
+    var applicationService: ApplicationService {
+        return ApplicationService.sharedService
+    }
+    
+    var store: Store {
+        return applicationStore
+    }
+}
+
 
 class ApplicationService: NSObject {
-    var stateMachine: StateMachine<StateValue,Store,Event> = StateMachine<StateValue,Store,Event>(queue: OperationQueue.main)
+    
+    private static var _sharedAppService: ApplicationService? = nil
+    
+    var stateMachine: StateMachine<StateValue,Store,Event>;
+    
+    
+    var queue: OperationQueue = OperationQueue()
+    
+    func performOperation(_ block: @escaping () -> Swift.Void) {
+        self.queue.addOperation(block);
+    }
+    
+    
+    public static var sharedService: ApplicationService {
+        if let s = _sharedAppService {
+            return s
+        }
+        else {
+            let service = ApplicationService()
+            _sharedAppService = service
+            service.configState()
+            return _sharedAppService!
+        }
+    }
+    
+    override init() {
+        self.stateMachine =  StateMachine<StateValue,Store,Event>(queue: self.queue)
+    }
+    
+    
+    
+    
     
     func configState()  {
         self.stateMachine.addState(StateInit(state:.Init))
         self.stateMachine.addState(StateViewTodoList(state:.ViewTodoList))
         self.stateMachine.addState(StateViewTodo(state:.ViewTodo))
         
+        if !self.stateMachine.start(state: .Init) {
+            print("Unable to start state machine")
+        }
+        else {
+            print("State machine is up")
+        }
         print("\(self.stateMachine.stateDiagram)")
         
     }

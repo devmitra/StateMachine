@@ -184,6 +184,8 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                         self?.store = s
                     }
                     self?.sendChangeNotification(self?.previuosState, next)
+                } else {
+                    self?.sendChangeNotification(self?.currentState, next)
                 }
             })
         }
@@ -196,6 +198,8 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                     self.store = s
                 }
                 sendChangeNotification(self.previuosState, next)
+            } else {
+                self.sendChangeNotification(self.currentState, next)
             }
         }
     }
@@ -322,7 +326,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         return processing
     }
     
-    open func start(state : StateId) throws -> Bool  {
+    open func start(state : StateId)  -> Bool  {
         if let _ = currentState {
             return false
         }
