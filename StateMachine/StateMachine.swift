@@ -354,7 +354,6 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     public var stateDiagram: String {
         var stateDiagram: String = "{State Machine}"
         for (stid , st) in self.states {
-            print("1")
             if let state = st as? State<StateId, Store, Event>, let next: [StateId] = state.possibleNextStates() {
                 stateDiagram.append("\n\t[\(stid)] ")
                 for nextState in next {

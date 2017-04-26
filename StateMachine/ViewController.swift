@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     }
     
     func testStateMachine()  {
-        enum Events : String, EventDescriptor {
+        /*enum Events : String, EventDescriptor {
             case One,Two,Three
         }
         
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
                 // your function here
                 let _ = stateMachine.handleEvent(.Three, nil)
             }
-        }
+        }*/
     }
     
 

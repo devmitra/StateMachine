@@ -21,6 +21,8 @@
 		2E2412E41D35185D00EB5E9F /* StateMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; };
 		2E2412E51D35185D00EB5E9F /* StateMachine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2E2412ED1D35187500EB5E9F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
+		2E8E40181EB092280018438A /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8E40171EB092280018438A /* TodoTableViewController.swift */; };
+		2E8E401A1EB092C80018438A /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8E40191EB092C80018438A /* ApplicationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		2E2412D71D35185D00EB5E9F /* StateMachineLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StateMachineLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2412DE1D35185D00EB5E9F /* StateMachineLibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachineLibTests.swift; sourceTree = "<group>"; };
 		2E2412E01D35185D00EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E8E40171EB092280018438A /* TodoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
+		2E8E40191EB092C80018438A /* ApplicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 		2E2412981D34FF3900EB5E9F /* StateMachine */ = {
 			isa = PBXGroup;
 			children = (
+				2E8E40171EB092280018438A /* TodoTableViewController.swift */,
 				2E2412991D34FF3900EB5E9F /* AppDelegate.swift */,
 				2E24129B1D34FF3900EB5E9F /* ViewController.swift */,
 				2E24129D1D34FF3900EB5E9F /* Main.storyboard */,
@@ -175,6 +180,7 @@
 				2E2412A51D34FF3900EB5E9F /* Info.plist */,
 				2E2412C71D34FF5100EB5E9F /* StateMachine.swift */,
 				2E2412C91D35061A00EB5E9F /* StateMachine.playground */,
+				2E8E40191EB092C80018438A /* ApplicationService.swift */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
@@ -425,6 +431,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E24129C1D34FF3900EB5E9F /* ViewController.swift in Sources */,
+				2E8E401A1EB092C80018438A /* ApplicationService.swift in Sources */,
+				2E8E40181EB092280018438A /* TodoTableViewController.swift in Sources */,
 				2E2412C81D34FF5100EB5E9F /* StateMachine.swift in Sources */,
 				2E24129A1D34FF3900EB5E9F /* AppDelegate.swift in Sources */,
 			);
