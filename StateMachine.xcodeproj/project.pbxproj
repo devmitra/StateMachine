@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E22C3FD1EB33F6000C96570 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22C3FC1EB33F6000C96570 /* AddViewController.swift */; };
+		2E22C3FF1EB3421E00C96570 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22C3FE1EB3421E00C96570 /* AddItemTableViewController.swift */; };
+		2E22C4011EB3522200C96570 /* NumberAdderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22C4001EB3522200C96570 /* NumberAdderApp.swift */; };
 		2E24129A1D34FF3900EB5E9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412991D34FF3900EB5E9F /* AppDelegate.swift */; };
 		2E24129F1D34FF3900EB5E9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E24129D1D34FF3900EB5E9F /* Main.storyboard */; };
 		2E2412A11D34FF3900EB5E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2412A01D34FF3900EB5E9F /* Assets.xcassets */; };
 		2E2412A41D34FF3900EB5E9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2412A21D34FF3900EB5E9F /* LaunchScreen.storyboard */; };
-		2E2412AF1D34FF3900EB5E9F /* StateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412AE1D34FF3900EB5E9F /* StateMachineTests.swift */; };
 		2E2412BA1D34FF3900EB5E9F /* StateMachineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412B91D34FF3900EB5E9F /* StateMachineUITests.swift */; };
 		2E2412C81D34FF5100EB5E9F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
 		2E2412D81D35185D00EB5E9F /* StateMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; };
@@ -22,17 +24,11 @@
 		2E2412ED1D35187500EB5E9F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
 		2E8E40181EB092280018438A /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8E40171EB092280018438A /* TodoTableViewController.swift */; };
 		2E8E401A1EB092C80018438A /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8E40191EB092C80018438A /* ApplicationService.swift */; };
+		2ECE2DE31EB3A32000A061DC /* StateMachineAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE2DE21EB3A32000A061DC /* StateMachineAppTests.swift */; };
 		2ED4671C1EB0F0530017DB71 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED4671B1EB0F0530017DB71 /* TodoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2E2412AB1D34FF3900EB5E9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2E24128E1D34FF3800EB5E9F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2E2412951D34FF3800EB5E9F;
-			remoteInfo = StateMachine;
-		};
 		2E2412B61D34FF3900EB5E9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2E24128E1D34FF3800EB5E9F /* Project object */;
@@ -61,6 +57,13 @@
 			remoteGlobalIDString = 2E2412CE1D35185D00EB5E9F;
 			remoteInfo = StateMachineLib;
 		};
+		2ECE2DE51EB3A32000A061DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E24128E1D34FF3800EB5E9F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E2412951D34FF3800EB5E9F;
+			remoteInfo = StateMachineApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,15 +81,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E22C3FC1EB33F6000C96570 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		2E22C3FE1EB3421E00C96570 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
+		2E22C4001EB3522200C96570 /* NumberAdderApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberAdderApp.swift; sourceTree = "<group>"; };
 		2E2412961D34FF3900EB5E9F /* StateMachineApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StateMachineApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2412991D34FF3900EB5E9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E24129E1D34FF3900EB5E9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E2412A01D34FF3900EB5E9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E2412A31D34FF3900EB5E9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E2412A51D34FF3900EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E2412AA1D34FF3900EB5E9F /* StateMachineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StateMachineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E2412AE1D34FF3900EB5E9F /* StateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachineTests.swift; sourceTree = "<group>"; };
-		2E2412B01D34FF3900EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2412B51D34FF3900EB5E9F /* StateMachineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StateMachineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2412B91D34FF3900EB5E9F /* StateMachineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachineUITests.swift; sourceTree = "<group>"; };
 		2E2412BB1D34FF3900EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +103,9 @@
 		2E2412E01D35185D00EB5E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E8E40171EB092280018438A /* TodoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		2E8E40191EB092C80018438A /* ApplicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
+		2ECE2DE01EB3A32000A061DC /* StateMachineAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StateMachineAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ECE2DE21EB3A32000A061DC /* StateMachineAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachineAppTests.swift; sourceTree = "<group>"; };
+		2ECE2DE41EB3A32000A061DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ED4671B1EB0F0530017DB71 /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,13 +115,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2412E41D35185D00EB5E9F /* StateMachine.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E2412A71D34FF3900EB5E9F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,17 +140,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2ECE2DDD1EB3A32000A061DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E22C3F91EB33AA400C96570 /* NumberAdder */ = {
+			isa = PBXGroup;
+			children = (
+				2E22C3FC1EB33F6000C96570 /* AddViewController.swift */,
+				2E22C3FE1EB3421E00C96570 /* AddItemTableViewController.swift */,
+				2E22C4001EB3522200C96570 /* NumberAdderApp.swift */,
+			);
+			name = NumberAdder;
+			sourceTree = "<group>";
+		};
 		2E24128D1D34FF3800EB5E9F = {
 			isa = PBXGroup;
 			children = (
 				2E2412981D34FF3900EB5E9F /* StateMachine */,
-				2E2412AD1D34FF3900EB5E9F /* StateMachineTests */,
 				2E2412B81D34FF3900EB5E9F /* StateMachineUITests */,
 				2E2412D01D35185D00EB5E9F /* StateMachineLib */,
 				2E2412DD1D35185D00EB5E9F /* StateMachineLibTests */,
+				2ECE2DE11EB3A32000A061DC /* StateMachineAppTests */,
 				2E2412971D34FF3900EB5E9F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,10 +176,10 @@
 			isa = PBXGroup;
 			children = (
 				2E2412961D34FF3900EB5E9F /* StateMachineApp.app */,
-				2E2412AA1D34FF3900EB5E9F /* StateMachineTests.xctest */,
 				2E2412B51D34FF3900EB5E9F /* StateMachineUITests.xctest */,
 				2E2412CF1D35185D00EB5E9F /* StateMachine.framework */,
 				2E2412D71D35185D00EB5E9F /* StateMachineLibTests.xctest */,
+				2ECE2DE01EB3A32000A061DC /* StateMachineAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +187,7 @@
 		2E2412981D34FF3900EB5E9F /* StateMachine */ = {
 			isa = PBXGroup;
 			children = (
+				2E22C3F91EB33AA400C96570 /* NumberAdder */,
 				2ED467181EB0EFF80017DB71 /* TodoApp */,
 				2E2412991D34FF3900EB5E9F /* AppDelegate.swift */,
 				2E24129D1D34FF3900EB5E9F /* Main.storyboard */,
@@ -181,15 +198,6 @@
 				2E2412C91D35061A00EB5E9F /* StateMachine.playground */,
 			);
 			path = StateMachine;
-			sourceTree = "<group>";
-		};
-		2E2412AD1D34FF3900EB5E9F /* StateMachineTests */ = {
-			isa = PBXGroup;
-			children = (
-				2E2412AE1D34FF3900EB5E9F /* StateMachineTests.swift */,
-				2E2412B01D34FF3900EB5E9F /* Info.plist */,
-			);
-			path = StateMachineTests;
 			sourceTree = "<group>";
 		};
 		2E2412B81D34FF3900EB5E9F /* StateMachineUITests */ = {
@@ -217,6 +225,15 @@
 				2E2412E01D35185D00EB5E9F /* Info.plist */,
 			);
 			path = StateMachineLibTests;
+			sourceTree = "<group>";
+		};
+		2ECE2DE11EB3A32000A061DC /* StateMachineAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				2ECE2DE21EB3A32000A061DC /* StateMachineAppTests.swift */,
+				2ECE2DE41EB3A32000A061DC /* Info.plist */,
+			);
+			path = StateMachineAppTests;
 			sourceTree = "<group>";
 		};
 		2ED467181EB0EFF80017DB71 /* TodoApp */ = {
@@ -261,24 +278,6 @@
 			productName = StateMachine;
 			productReference = 2E2412961D34FF3900EB5E9F /* StateMachineApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		2E2412A91D34FF3900EB5E9F /* StateMachineTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2E2412C11D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineTests" */;
-			buildPhases = (
-				2E2412A61D34FF3900EB5E9F /* Sources */,
-				2E2412A71D34FF3900EB5E9F /* Frameworks */,
-				2E2412A81D34FF3900EB5E9F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2E2412AC1D34FF3900EB5E9F /* PBXTargetDependency */,
-			);
-			name = StateMachineTests;
-			productName = StateMachineTests;
-			productReference = 2E2412AA1D34FF3900EB5E9F /* StateMachineTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		2E2412B41D34FF3900EB5E9F /* StateMachineUITests */ = {
 			isa = PBXNativeTarget;
@@ -335,24 +334,37 @@
 			productReference = 2E2412D71D35185D00EB5E9F /* StateMachineLibTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		2ECE2DDF1EB3A32000A061DC /* StateMachineAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ECE2DE71EB3A32000A061DC /* Build configuration list for PBXNativeTarget "StateMachineAppTests" */;
+			buildPhases = (
+				2ECE2DDC1EB3A32000A061DC /* Sources */,
+				2ECE2DDD1EB3A32000A061DC /* Frameworks */,
+				2ECE2DDE1EB3A32000A061DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2ECE2DE61EB3A32000A061DC /* PBXTargetDependency */,
+			);
+			name = StateMachineAppTests;
+			productName = StateMachineAppTests;
+			productReference = 2ECE2DE01EB3A32000A061DC /* StateMachineAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2E24128E1D34FF3800EB5E9F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Pushan Mitra";
 				TargetAttributes = {
 					2E2412951D34FF3800EB5E9F = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
-					};
-					2E2412A91D34FF3900EB5E9F = {
-						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 2E2412951D34FF3800EB5E9F;
 					};
 					2E2412B41D34FF3900EB5E9F = {
 						CreatedOnToolsVersion = 8.0;
@@ -365,6 +377,11 @@
 					};
 					2E2412D61D35185D00EB5E9F = {
 						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2E2412951D34FF3800EB5E9F;
+					};
+					2ECE2DDF1EB3A32000A061DC = {
+						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2E2412951D34FF3800EB5E9F;
 					};
@@ -384,10 +401,10 @@
 			projectRoot = "";
 			targets = (
 				2E2412951D34FF3800EB5E9F /* StateMachineApp */,
-				2E2412A91D34FF3900EB5E9F /* StateMachineTests */,
 				2E2412B41D34FF3900EB5E9F /* StateMachineUITests */,
 				2E2412CE1D35185D00EB5E9F /* StateMachine */,
 				2E2412D61D35185D00EB5E9F /* StateMachineLibTests */,
+				2ECE2DDF1EB3A32000A061DC /* StateMachineAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -400,13 +417,6 @@
 				2E2412A41D34FF3900EB5E9F /* LaunchScreen.storyboard in Resources */,
 				2E2412A11D34FF3900EB5E9F /* Assets.xcassets in Resources */,
 				2E24129F1D34FF3900EB5E9F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E2412A81D34FF3900EB5E9F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +441,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2ECE2DDE1EB3A32000A061DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -438,19 +455,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E22C3FF1EB3421E00C96570 /* AddItemTableViewController.swift in Sources */,
+				2E22C4011EB3522200C96570 /* NumberAdderApp.swift in Sources */,
 				2ED4671C1EB0F0530017DB71 /* TodoViewController.swift in Sources */,
 				2E8E401A1EB092C80018438A /* ApplicationService.swift in Sources */,
+				2E22C3FD1EB33F6000C96570 /* AddViewController.swift in Sources */,
 				2E8E40181EB092280018438A /* TodoTableViewController.swift in Sources */,
 				2E2412C81D34FF5100EB5E9F /* StateMachine.swift in Sources */,
 				2E24129A1D34FF3900EB5E9F /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E2412A61D34FF3900EB5E9F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E2412AF1D34FF3900EB5E9F /* StateMachineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,14 +490,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2ECE2DDC1EB3A32000A061DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2ECE2DE31EB3A32000A061DC /* StateMachineAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2E2412AC1D34FF3900EB5E9F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2E2412951D34FF3800EB5E9F /* StateMachineApp */;
-			targetProxy = 2E2412AB1D34FF3900EB5E9F /* PBXContainerItemProxy */;
-		};
 		2E2412B71D34FF3900EB5E9F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2E2412951D34FF3800EB5E9F /* StateMachineApp */;
@@ -505,6 +520,11 @@
 			isa = PBXTargetDependency;
 			target = 2E2412CE1D35185D00EB5E9F /* StateMachine */;
 			targetProxy = 2E2412E21D35185D00EB5E9F /* PBXContainerItemProxy */;
+		};
+		2ECE2DE61EB3A32000A061DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E2412951D34FF3800EB5E9F /* StateMachineApp */;
+			targetProxy = 2ECE2DE51EB3A32000A061DC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -630,7 +650,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -643,33 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		2E2412C21D34FF3900EB5E9F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = StateMachineTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StateMachine.app/StateMachine";
-			};
-			name = Debug;
-		};
-		2E2412C31D34FF3900EB5E9F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = StateMachineTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.StateMachineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StateMachine.app/StateMachine";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
@@ -763,6 +757,36 @@
 			};
 			name = Release;
 		};
+		2ECE2DE81EB3A32000A061DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = StateMachineAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pmitra.StateMachineAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StateMachineApp.app/StateMachineApp";
+			};
+			name = Debug;
+		};
+		2ECE2DE91EB3A32000A061DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = StateMachineAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pmitra.StateMachineAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StateMachineApp.app/StateMachineApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -780,15 +804,6 @@
 			buildConfigurations = (
 				2E2412BF1D34FF3900EB5E9F /* Debug */,
 				2E2412C01D34FF3900EB5E9F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2E2412C11D34FF3900EB5E9F /* Build configuration list for PBXNativeTarget "StateMachineTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2E2412C21D34FF3900EB5E9F /* Debug */,
-				2E2412C31D34FF3900EB5E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -819,6 +834,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2ECE2DE71EB3A32000A061DC /* Build configuration list for PBXNativeTarget "StateMachineAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ECE2DE81EB3A32000A061DC /* Debug */,
+				2ECE2DE91EB3A32000A061DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

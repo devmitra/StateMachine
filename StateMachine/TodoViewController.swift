@@ -21,7 +21,7 @@ class TodoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.textView.text = self.applicationService.store.list[self.applicationService.store.seletedTodoItem]
+        self.textView.text = self.applicationService.todoStore.list[self.applicationService.todoStore.seletedTodoItem]
     }
 
     override func didReceiveMemoryWarning() {

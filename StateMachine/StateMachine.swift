@@ -8,6 +8,12 @@
 
 import Foundation
 
+// Application Service protocol
+
+
+
+
+
 /*:
  # State Machine: Tutorial
  State machine is excelent concept of application development. Here whole application is composed into
@@ -55,6 +61,8 @@ public protocol StateIdentifier: RawRepresentable, Hashable {
 }
 
 public typealias StateNames = StateIdentifier
+public typealias State = StateIdentifier
+
 
 
 /**
@@ -64,7 +72,7 @@ public typealias StateNames = StateIdentifier
  2. Update state variable or store
  3. Only applicable to the state machine with same type
  */
-open class State<S: StateIdentifier,St, E: EventDescriptor>  {
+open class StateConfiguration<S: StateIdentifier,St, E: EventDescriptor>  {
     public typealias StateId = S
     public typealias Store = St
     public typealias Event  = E
@@ -86,7 +94,7 @@ open class State<S: StateIdentifier,St, E: EventDescriptor>  {
         self.state = state
     }
     
-    open func operation(_ event: State.Event, _ store: State.Store?,_ data: Any? , _ completion: Completion) {
+    open func operation(_ event: StateConfiguration.Event, _ store: StateConfiguration.Store?,_ data: Any? , _ completion: Completion) {
         
     }
     
@@ -133,8 +141,8 @@ struct StateMachineObservationHandle<T> : StateObservationHandle {
 open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: CustomStringConvertible {
     
     
-    public typealias StateObj = State<StateId,Store,Event>
-    public typealias StateAction = (Event,Store?,Any?,State<StateId,Store,Event>.Completion) -> Void
+    public typealias StateObj = StateConfiguration<StateId,Store,Event>
+    public typealias StateAction = (Event,Store?,Any?,StateConfiguration<StateId,Store,Event>.Completion) -> Void
     public typealias ChangeObserver = (Event,StateId?,StateId,Store?) -> Void
     
     //: Hitory Tuple for state
@@ -176,17 +184,17 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         //print("Complete ---- next \(next)")
         if let q: OperationQueue = self.queue {
             q.addOperation({ [weak self] in
+                //print("------")
                 self?.processing = false
                 if self?.currentState != next {
                     self?.storeCurrentStateToHistory()
                     self?.currentState = next
-                    if let  s: Store = store as? Store {
-                        self?.store = s
-                    }
-                    self?.sendChangeNotification(self?.previuosState, next)
-                } else {
-                    self?.sendChangeNotification(self?.currentState, next)
                 }
+                
+                if let  s: Store = store as? Store {
+                    self?.store = s
+                }
+                self?.sendChangeNotification(self?.previuosState, next)
             })
         }
         else {
@@ -194,13 +202,12 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
             if self.currentState != next {
                 self.storeCurrentStateToHistory()
                 currentState = next
-                if let  s: Store = store as? Store {
-                    self.store = s
-                }
-                sendChangeNotification(self.previuosState, next)
-            } else {
-                self.sendChangeNotification(self.currentState, next)
             }
+            
+            if let  s: Store = store as? Store {
+                self.store = s
+            }
+            sendChangeNotification(self.previuosState, next)
         }
     }
     
@@ -255,10 +262,26 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
      ### addState (State)
      Adding a new state State object based operation to StateMachine. Only State of type Event,StateName and Store is accepted.
      */
-    open func addState(_ configuration: State<StateId,Store,Event>) {
+    open func addState(_ configuration: StateConfiguration<StateId,Store,Event>) {
         if let stid : StateId = configuration.state {
             states[stid] = configuration
         }
+    }
+    
+    open func handleEventAsync(_ event: Event, _ data: Any?) -> Bool {
+        if let q: OperationQueue = self.queue {
+            OperationQueue.main.addOperation({ [weak self] in
+                q.addOperation({ [weak self] in
+                    let _ = self?.handleEvent(event, data)
+                })
+            })
+        }
+        else {
+            OperationQueue.main.addOperation { [weak self] in
+                let _ = self?.handleEvent(event, data)
+            }
+        }
+        return true
     }
     
     /*!
@@ -266,10 +289,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
      Handling event associated with application.
      */
     open func handleEvent(_ event: Event,_ data: Any?) -> Bool {
-        if processing {
-            //print("processing")
-            return !processing
-        }
+        
         
         if let current: StateId = self.currentState,let handle = states[current] {
             var accepted: Bool = false
@@ -282,10 +302,17 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                     q.addOperation({ 
                         state.operation(event, self.store, data ,{ [weak self](next, store) in
                             self?.completion(next: next, store: store)
-                            })
+                        })
                     })
                 }
                 else {
+                    
+                    // Not accepting event if state machine is sync
+                    if processing {
+                        //print("processing")
+                        return !processing
+                    }
+                    
                     historyEvents.append((event, Date()))
                     state.operation(event, self.store, data, { [weak self](next, store) in
                         self?.completion(next: next, store: store)
@@ -295,6 +322,9 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                 
             }
             else if let action: StateAction = handle as? StateAction {
+                
+                
+                // Not accepting event if state machine is sync
                 processing = true
                 accepted = true
                 if let q: OperationQueue = self.queue {
@@ -306,6 +336,12 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                     })
                 }
                 else {
+                    
+                    if processing {
+                        //print("processing")
+                        return !processing
+                    }
+                    
                     historyEvents.append((event, Date()))
                     action(event, self.store, data, {[weak self] (next, store) in
                         self?.completion(next: next, store: store)
@@ -334,6 +370,30 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         return true
     }
     
+    open func start(_ state: StateId,_ event: Event) -> Bool {
+        if let _ = currentState {
+            return false
+        }
+        
+        if let config: StateObj = states[state] as? StateObj {
+            historyEvents.append((event, Date()))
+            config.operation(event, nil, nil, { [weak self](next, store) in
+                self?.completion(next: next, store: store)
+            })
+            return true
+        }
+        else if let action = states[state] as? StateAction {
+            historyEvents.append((event, Date()))
+            action(event, self.store, nil, {[weak self] (next, store) in
+                self?.completion(next: next, store: store)
+            })
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     internal func removeObserverWitheKye(_ key: Int) {
         observers.removeValue(forKey: key)
     }
@@ -352,13 +412,13 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     }
     
     open var description: String {
-        return "[State Machine: <\(type(of: self))> , current: \(String(describing: self.currentState)) , previous: \(String(describing: self.previuosState)), last event: \(String(describing: self.lastEvent)), total states: \(self.states.count)]"
+        return "[State Machine: <\(type(of: self))> , current: \(String(describing: self.currentState)) , previous: \(String(describing: self.previuosState)), last event: \(String(describing: self.lastEvent)), total states: \(self.states.count) processing: \(self.processing)]"
     }
     
     public var stateDiagram: String {
         var stateDiagram: String = "{State Machine}"
         for (stid , st) in self.states {
-            if let state = st as? State<StateId, Store, Event>, let next: [StateId] = state.possibleNextStates() {
+            if let state = st as? StateConfiguration<StateId, Store, Event>, let next: [StateId] = state.possibleNextStates() {
                 stateDiagram.append("\n\t[\(stid)] ")
                 for nextState in next {
                     stateDiagram.append("\n\t| -----> [\(nextState)]")
@@ -375,3 +435,43 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
        
     }
 }
+
+
+public class ApplicationService<State: StateNames,Store, Event: EventDescriptor,Err: Error>: NSObject {
+    
+    
+    open var queue: OperationQueue = OperationQueue.main
+    open var stateMachine: StateMachine<State,Store,Event>
+    
+    
+    func performOperation(_ block: @escaping () -> Swift.Void) {
+        self.queue.addOperation(block);
+    }
+    
+    override init() {
+        stateMachine = StateMachine<State,Store,Event>(queue: self.queue)
+    }
+    
+    open class func appService()-> ApplicationService {
+        return ApplicationService()
+    }
+    
+    public var store: Store? {
+        return self.stateMachine.store
+    }
+    
+    open func configureStateMachine() -> Swift.Void {
+        
+    }
+    
+    
+}
+
+public protocol StateMachineObserver {
+    associatedtype AppStore = Any
+    associatedtype AppState = State
+    associatedtype AppEvent = EventDescriptor
+    
+    func observeChange(event: AppEvent, current: AppState?, next: AppState, store: AppStore?)
+}
+

@@ -1,54 +1,29 @@
 //
-//  TodoTableViewController.swift
+//  AddItemTableViewController.swift
 //  StateMachine
 //
-//  Created by Pushan Mitra on 26/04/17.
+//  Created by Pushan Mitra on 28/04/17.
 //  Copyright © 2017 Pushan Mitra. All rights reserved.
 //
 
 import UIKit
 
-class TodoTableViewController: UITableViewController {
-    
-    var handle : StateObservationHandle? = nil
-    
+class AddItemTableViewCell: UITableViewCell {
+    @IBOutlet var expressionTextLable: UILabel?
+}
+
+class AddItemTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
         
-        
-        self.applicationService.performOperation {
-            self.handle = self.applicationService.stateMachine.addChangeObserver({ (event, current, next, store) in
-                OperationQueue.main.addOperation({
-                    switch next {
-                    case .ViewTodo:
-                        print("View Todo List")
-                        if self.navigationController?.topViewController is TodoTableViewController {
-                            self.performSegue(withIdentifier: "pushTodoView", sender: self)
-                        }
-                        else {
-                            print("Item in display")
-                        }
-                    case .ViewTodoList:
-                        
-                        if self.navigationController?.topViewController is TodoViewController {
-                           let _ = self.navigationController?.popToRootViewController(animated: true)
-                        }
-                        if event != Event.RemoveTodo {
-                            self.tableView.reloadData()
-                        }
-                        
-                    default:
-                        print("No default action")
-                        
-                    }
-                })
+        self.numberAddApp.performOperation {
+            let _ = self.numberAddApp.stateMachine.addChangeObserver({ (event, current, next, store) in
+                self.tableView?.reloadData()
             })
-        }
-        
-        if !self.applicationService.stateMachine.handleEvent(.Start, nil) {
-            print("Not able to send Start event")
         }
 
         // Uncomment the following line to preserve selection between presentations
@@ -72,25 +47,27 @@ class TodoTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.applicationService.todoStore.list.count
+        guard let count = self.numberAddApp.store?.expressionItems.count else {
+            return 0
+        }
+        return count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
-        cell.textLabel?.text = self.applicationService.todoStore.list[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NumberCell", for: indexPath)
 
         // Configure the cell...
+        if let c: AddItemTableViewCell = cell as? AddItemTableViewCell, let str = self.numberAddApp.store?.expressionItems[indexPath.row] {
+            c.expressionTextLable?.text = str
+        }
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let _ = self.applicationService.stateMachine.handleEvent(.ViewTodo, indexPath.row)
+        let _ = self.numberAddApp.stateMachine.handleEvent(.EditExpression, indexPath.row)
     }
-    
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -99,29 +76,17 @@ class TodoTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            //tableView.deselectRow(at: indexPath, animated: true)
-            
-            if !self.applicationService.stateMachine.handleEvent(.RemoveTodo, indexPath.row) {
-                print("Unable to handle event RemoveTodo")
-            }
-            
-            self.applicationService.queue.addOperation {
-                OperationQueue.main.addOperation {
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
+    */
 
     /*
     // Override to support rearranging the table view.
@@ -147,17 +112,5 @@ class TodoTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func addTodo(_ sender: UIBarButtonItem) {
-        
-        if !self.applicationService.stateMachine.handleEvent(.AddTodo, nil) {
-            print("State machine not able to handle AddTodo Event")
-        }
-    }
-    
-    
-    @IBAction func removeTodo(_ sender: UIBarButtonItem) {
-    }
-    
 
 }

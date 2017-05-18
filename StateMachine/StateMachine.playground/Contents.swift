@@ -30,7 +30,7 @@ enum States : String, StateNames {
 }
 
 // State : State behavior controller composed with type Events and States and it is applicable to same kind of state machine.
-class StateX : State<States,[String: Any],Events> {
+class StateX : StateConfiguration<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?,_ data: Any?, _ completion: Completion) {
         print("State X ----- Processing Event : \(event)")
         completion(States.Y, nil)
@@ -41,7 +41,7 @@ class StateX : State<States,[String: Any],Events> {
     }
 }
 
-class StateY : State<States,[String: Any],Events> {
+class StateY : StateConfiguration<States,[String: Any],Events> {
     override func operation(_ event: Events, _ store: [String : Any]?,_ data: Any?, _ completion: Completion) {
         print("State Y ----- Processing Event : \(event)")
         completion(States.X, nil)
@@ -79,7 +79,7 @@ let handleSyncStateMachine: StateObservationHandle = stateMachineSync.addChangeO
 }
 
 //:  Starting machine with state X
-try! stateMachineSync.start(state: .Y)
+stateMachineSync.start(state: .Y)
 
 //:  Events
 stateMachineSync.handleEvent(.Two, nil)
@@ -125,7 +125,7 @@ NotificationCenter.default.addObserver(observer, selector: #selector(Observer.no
 
 
 //: Starting machine with state X
-try! stateMachine.start(state: .X)
+stateMachine.start(state: .X)
 
 
 //:  Handling events
@@ -150,4 +150,5 @@ DispatchQueue.main.asyncAfter(deadline: .now() + timeInSec) {
         let _ = stateMachine.handleEvent(.Three, nil)
     }
 }
+
 
