@@ -15,7 +15,6 @@
 		2E2412A11D34FF3900EB5E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2412A01D34FF3900EB5E9F /* Assets.xcassets */; };
 		2E2412A41D34FF3900EB5E9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2412A21D34FF3900EB5E9F /* LaunchScreen.storyboard */; };
 		2E2412BA1D34FF3900EB5E9F /* StateMachineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412B91D34FF3900EB5E9F /* StateMachineUITests.swift */; };
-		2E2412C81D34FF5100EB5E9F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
 		2E2412E11D35185D00EB5E9F /* StateMachineLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2412D11D35185D00EB5E9F /* StateMachineLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E2412E41D35185D00EB5E9F /* StateMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; };
 		2E2412E51D35185D00EB5E9F /* StateMachine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2412CF1D35185D00EB5E9F /* StateMachine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -204,7 +203,7 @@
 		2E2412981D34FF3900EB5E9F /* StateMachine */ = {
 			isa = PBXGroup;
 			children = (
-				2E55CFE4211C6429007A67BC /* Events */,
+				2E978AF62138EE1800956065 /* Sources */,
 				2E22C3F91EB33AA400C96570 /* NumberAdder */,
 				2ED467181EB0EFF80017DB71 /* TodoApp */,
 				2E2412991D34FF3900EB5E9F /* AppDelegate.swift */,
@@ -212,7 +211,6 @@
 				2E2412A01D34FF3900EB5E9F /* Assets.xcassets */,
 				2E2412A21D34FF3900EB5E9F /* LaunchScreen.storyboard */,
 				2E2412A51D34FF3900EB5E9F /* Info.plist */,
-				2E2412C71D34FF5100EB5E9F /* StateMachine.swift */,
 				2E2412C91D35061A00EB5E9F /* StateMachine.playground */,
 			);
 			path = StateMachine;
@@ -236,20 +234,6 @@
 			path = StateMachineLib;
 			sourceTree = "<group>";
 		};
-		2E55CFE4211C6429007A67BC /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				2E55CFEA211C6469007A67BC /* ChangeListener.swift */,
-				2E55CFE8211C6469007A67BC /* Event.swift */,
-				2E55CFE7211C6468007A67BC /* EventListener.swift */,
-				2E55CFEB211C6469007A67BC /* Helpers.swift */,
-				2E55CFE6211C6468007A67BC /* Listener.swift */,
-				2E55CFE9211C6469007A67BC /* NotificationListener.swift */,
-				2E55CFE5211C6468007A67BC /* Notifier.swift */,
-			);
-			name = Events;
-			sourceTree = "<group>";
-		};
 		2E55D007211C67CD007A67BC /* StateMachineTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +246,21 @@
 				2E55D00A211C67CD007A67BC /* Info.plist */,
 			);
 			path = StateMachineTests;
+			sourceTree = "<group>";
+		};
+		2E978AF62138EE1800956065 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2E2412C71D34FF5100EB5E9F /* StateMachine.swift */,
+				2E55CFEA211C6469007A67BC /* ChangeListener.swift */,
+				2E55CFE8211C6469007A67BC /* Event.swift */,
+				2E55CFE7211C6468007A67BC /* EventListener.swift */,
+				2E55CFEB211C6469007A67BC /* Helpers.swift */,
+				2E55CFE6211C6468007A67BC /* Listener.swift */,
+				2E55CFE9211C6469007A67BC /* NotificationListener.swift */,
+				2E55CFE5211C6468007A67BC /* Notifier.swift */,
+			);
+			name = Sources;
 			sourceTree = "<group>";
 		};
 		2ECE2DE11EB3A32000A061DC /* StateMachineAppTests */ = {
@@ -496,7 +495,6 @@
 				2E8E401A1EB092C80018438A /* ApplicationService.swift in Sources */,
 				2E22C3FD1EB33F6000C96570 /* AddViewController.swift in Sources */,
 				2E8E40181EB092280018438A /* TodoTableViewController.swift in Sources */,
-				2E2412C81D34FF5100EB5E9F /* StateMachine.swift in Sources */,
 				2E24129A1D34FF3900EB5E9F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
