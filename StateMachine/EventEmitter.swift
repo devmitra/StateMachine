@@ -1,5 +1,5 @@
 
-public class Event <T> {
+public class EventEmitter <T> {
     
     @available(*, deprecated, message: "This property is not accurate; please use 'getListeners().count' instead.")
     public var listenerCount: Int { return _listeners.count }
@@ -79,7 +79,7 @@ public class Event <T> {
     }
 }
 
-public extension Event where T == Void {
+public extension EventEmitter where T == Void {
     
     func emit () {
         _emit((), on: "0")

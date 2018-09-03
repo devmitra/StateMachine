@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E0BB66B213D53680002D7F8 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2412C71D34FF5100EB5E9F /* StateMachine.swift */; };
+		2E0BB66C213D536C0002D7F8 /* ChangeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFEA211C6469007A67BC /* ChangeListener.swift */; };
+		2E0BB66D213D53710002D7F8 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE6211C6468007A67BC /* Listener.swift */; };
+		2E0BB66E213D53730002D7F8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFEB211C6469007A67BC /* Helpers.swift */; };
+		2E0BB66F213D53760002D7F8 /* EventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE7211C6468007A67BC /* EventListener.swift */; };
+		2E0BB670213D53790002D7F8 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE8211C6469007A67BC /* EventEmitter.swift */; };
+		2E0BB671213D537B0002D7F8 /* NotificationListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE9211C6469007A67BC /* NotificationListener.swift */; };
+		2E0BB672213D53800002D7F8 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE5211C6468007A67BC /* Notifier.swift */; };
 		2E22C3FD1EB33F6000C96570 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22C3FC1EB33F6000C96570 /* AddViewController.swift */; };
 		2E22C3FF1EB3421E00C96570 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22C3FE1EB3421E00C96570 /* AddItemTableViewController.swift */; };
 		2E22C4011EB3522200C96570 /* NumberAdderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22C4001EB3522200C96570 /* NumberAdderApp.swift */; };
@@ -22,7 +30,7 @@
 		2E55CFED211C6469007A67BC /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE5211C6468007A67BC /* Notifier.swift */; };
 		2E55CFEF211C6469007A67BC /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE6211C6468007A67BC /* Listener.swift */; };
 		2E55CFF1211C6469007A67BC /* EventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE7211C6468007A67BC /* EventListener.swift */; };
-		2E55CFF3211C6469007A67BC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE8211C6469007A67BC /* Event.swift */; };
+		2E55CFF3211C6469007A67BC /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE8211C6469007A67BC /* EventEmitter.swift */; };
 		2E55CFF5211C6469007A67BC /* NotificationListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFE9211C6469007A67BC /* NotificationListener.swift */; };
 		2E55CFF7211C6469007A67BC /* ChangeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFEA211C6469007A67BC /* ChangeListener.swift */; };
 		2E55CFF9211C6469007A67BC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55CFEB211C6469007A67BC /* Helpers.swift */; };
@@ -106,7 +114,7 @@
 		2E55CFE5211C6468007A67BC /* Notifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
 		2E55CFE6211C6468007A67BC /* Listener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		2E55CFE7211C6468007A67BC /* EventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListener.swift; sourceTree = "<group>"; };
-		2E55CFE8211C6469007A67BC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		2E55CFE8211C6469007A67BC /* EventEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEmitter.swift; sourceTree = "<group>"; };
 		2E55CFE9211C6469007A67BC /* NotificationListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationListener.swift; sourceTree = "<group>"; };
 		2E55CFEA211C6469007A67BC /* ChangeListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeListener.swift; sourceTree = "<group>"; };
 		2E55CFEB211C6469007A67BC /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -253,7 +261,7 @@
 			children = (
 				2E2412C71D34FF5100EB5E9F /* StateMachine.swift */,
 				2E55CFEA211C6469007A67BC /* ChangeListener.swift */,
-				2E55CFE8211C6469007A67BC /* Event.swift */,
+				2E55CFE8211C6469007A67BC /* EventEmitter.swift */,
 				2E55CFE7211C6468007A67BC /* EventListener.swift */,
 				2E55CFEB211C6469007A67BC /* Helpers.swift */,
 				2E55CFE6211C6468007A67BC /* Listener.swift */,
@@ -492,10 +500,18 @@
 				2E22C3FF1EB3421E00C96570 /* AddItemTableViewController.swift in Sources */,
 				2E22C4011EB3522200C96570 /* NumberAdderApp.swift in Sources */,
 				2ED4671C1EB0F0530017DB71 /* TodoViewController.swift in Sources */,
+				2E0BB66B213D53680002D7F8 /* StateMachine.swift in Sources */,
+				2E0BB66E213D53730002D7F8 /* Helpers.swift in Sources */,
 				2E8E401A1EB092C80018438A /* ApplicationService.swift in Sources */,
 				2E22C3FD1EB33F6000C96570 /* AddViewController.swift in Sources */,
 				2E8E40181EB092280018438A /* TodoTableViewController.swift in Sources */,
+				2E0BB66C213D536C0002D7F8 /* ChangeListener.swift in Sources */,
 				2E24129A1D34FF3900EB5E9F /* AppDelegate.swift in Sources */,
+				2E0BB672213D53800002D7F8 /* Notifier.swift in Sources */,
+				2E0BB671213D537B0002D7F8 /* NotificationListener.swift in Sources */,
+				2E0BB66F213D53760002D7F8 /* EventListener.swift in Sources */,
+				2E0BB66D213D53710002D7F8 /* Listener.swift in Sources */,
+				2E0BB670213D53790002D7F8 /* EventEmitter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +534,7 @@
 				2E55CFF7211C6469007A67BC /* ChangeListener.swift in Sources */,
 				2E55CFF1211C6469007A67BC /* EventListener.swift in Sources */,
 				2E55CFED211C6469007A67BC /* Notifier.swift in Sources */,
-				2E55CFF3211C6469007A67BC /* Event.swift in Sources */,
+				2E55CFF3211C6469007A67BC /* EventEmitter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,7 @@
 
 import UIKit
 import XCTest
-import StateMachineLib
+import StateMachine
 
 class ChangeListenerTests: XCTestCase {
 

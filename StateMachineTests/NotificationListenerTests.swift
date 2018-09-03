@@ -1,6 +1,6 @@
 
 import XCTest
-import StateMachineLib
+import StateMachine
 
 class NotificationListenerTests: XCTestCase {
   

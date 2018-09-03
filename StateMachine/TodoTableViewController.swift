@@ -35,7 +35,7 @@ class TodoTableViewController: UITableViewController {
                         if self.navigationController?.topViewController is TodoViewController {
                            let _ = self.navigationController?.popToRootViewController(animated: true)
                         }
-                        if event != Event.RemoveTodo {
+                        if event != TodoEvent.RemoveTodo {
                             self.tableView.reloadData()
                         }
                         

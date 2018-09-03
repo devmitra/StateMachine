@@ -1,7 +1,7 @@
 
 public class EventListener <T> : Listener {
     
-    public weak var event: Event<T>!
+    public weak var event: EventEmitter<T>!
     
     override func _startListening () {
         let ptr: DynamicPointer<Listener> =
@@ -33,7 +33,7 @@ public class EventListener <T> : Listener {
         }
     }
     
-    init (_ event: Event<T>, _ target: AnyObject!, _ once: Bool, _ handler: @escaping (T) -> Void) {
+    init (_ event: EventEmitter<T>, _ target: AnyObject!, _ once: Bool, _ handler: @escaping (T) -> Void) {
         self.event = event
         super.init(target, once, {
             handler($0 as! T)

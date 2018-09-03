@@ -1,6 +1,6 @@
 
 import XCTest
-import StateMachineLib
+import StateMachine
 
 class PerformanceTests : XCTestCase {
 
@@ -26,7 +26,7 @@ class PerformanceTests : XCTestCase {
   }
 
   func testEmitterPerformance () {
-    let e = Event<NSDictionary>()
+    let e = EventEmitter<NSDictionary>()
 
     for _ in 0...99 {
       self.listeners += e.on { _ in }

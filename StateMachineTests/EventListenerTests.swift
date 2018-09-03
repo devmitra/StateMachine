@@ -1,10 +1,10 @@
 
 import XCTest
-import StateMachineLib
+import StateMachine
 
 class EventListenerTests: XCTestCase {
 
-  var event: Event<Void>!
+  var event: EventEmitter<Void>!
 
   var listener: Listener!
   
@@ -13,7 +13,7 @@ class EventListenerTests: XCTestCase {
   override func setUp() {
     super.setUp()
 
-    event = Event()
+    event = EventEmitter()
     listener = nil
     calls = 0
   }

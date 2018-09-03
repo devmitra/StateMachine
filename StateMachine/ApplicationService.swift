@@ -26,11 +26,11 @@ enum StateValue: String, StateNames {
     case Init, ViewTodoList, ViewTodo
 }
 
-enum Event: String, EventDescriptor {
+enum TodoEvent: String, EventDescriptor {
     case Start,AddTodo, RemoveTodo, ViewTodo, EditTodo, BackToList
 }
 
-class StateInit: StateConfiguration<StateValue,Store,Event> {
+class StateInit: StateConfiguration<StateValue,Store,TodoEvent> {
     override func operation(_ event: Event, _ store: Store?, _ data: Any?, _ completion: (StateValue, Store?) -> Void) {
         if event == .Start {
             //applicationStore.list.append("add todo item by pressing +")
@@ -48,7 +48,7 @@ class StateInit: StateConfiguration<StateValue,Store,Event> {
     }
 }
 
-class StateViewTodoList: StateConfiguration<StateValue,Store,Event> {
+class StateViewTodoList: StateConfiguration<StateValue,Store,TodoEvent> {
     override func operation(_ event: Event, _ store: Store?, _ data: Any?, _ completion: (StateValue, Store?) -> Void) {
         
         if let appStore: Store = store {
@@ -83,7 +83,7 @@ class StateViewTodoList: StateConfiguration<StateValue,Store,Event> {
     }
 }
 
-class StateViewTodo: StateConfiguration<StateValue,Store,Event> {
+class StateViewTodo: StateConfiguration<StateValue,Store,TodoEvent> {
     override func operation(_ event: Event, _ store: Store?, _ data: Any?, _ completion: (StateValue, Store?) -> Void) {
         if let appStore: Store = store {
             switch event {
@@ -121,7 +121,7 @@ class TodoApplicationService: NSObject {
     
     private static var _sharedAppService: TodoApplicationService? = nil
     
-    var stateMachine: StateMachine<StateValue,Store,Event>;
+    var stateMachine: StateMachine<StateValue,Store,TodoEvent>;
     
     
     var queue: OperationQueue = OperationQueue()
@@ -144,7 +144,7 @@ class TodoApplicationService: NSObject {
     }
     
     override init() {
-        self.stateMachine =  StateMachine<StateValue,Store,Event>(queue: self.queue)
+        self.stateMachine =  StateMachine<StateValue,Store,TodoEvent>(queue: self.queue)
     }
     
     

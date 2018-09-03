@@ -105,6 +105,9 @@ open class StateConfiguration<S: StateIdentifier,St, E: EventDescriptor>  {
     
 }
 
+// TypeAlias of StateConfiguration
+typealias Transition = StateConfiguration
+
 
 public enum StateMachineError: Error {
     case StartError, MachineError
@@ -144,12 +147,13 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     public typealias StateObj = StateConfiguration<StateId,Store,Event>
     public typealias StateAction = (Event,Store?,Any?,StateConfiguration<StateId,Store,Event>.Completion) -> Void
     public typealias ChangeObserver = (Event,StateId?,StateId,Store?) -> Void
+    public typealias EventTuple = (event: Event,prvious: StateId?,next: StateId,store: Store?)
+    public typealias EventObserver = (EventTuple) -> Void
     
     //: Hitory Tuple for state
     public typealias StateHistory = (state: StateId,time: Date);
     //: History Events
     public typealias EventHistory = (event:Event, time:Date);
-    
     
     
     /*:
@@ -166,6 +170,10 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     // Variables
     // Internal setter, open getter
     internal(set) open var currentState: StateId?
+    
+    // Event Emitter
+    internal var emitter: EventEmitter<EventTuple> = EventEmitter<EventTuple>()
+    
     
     internal var historyStates: [StateHistory] = [StateHistory]()
     internal var historyEvents: [EventHistory] = [EventHistory]()
@@ -218,10 +226,12 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         let uinfo:[NSObject : AnyObject] = [StateMachineKey as NSObject: self]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: StateMachineChangeNotification), object: nil, userInfo: uinfo)
         
-        for (_,obsv) in observers {
-            if let e: Event = self.lastEvent {
+        
+        if let e: Event = self.lastEvent {
+            for (_,obsv) in observers {
                 obsv(e,previous,next,self.store)
             }
+            self.emitter.emit((e, previous, next, self.store))
         }
     }
     
@@ -409,6 +419,10 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
             }
         }
         return handle
+    }
+    
+    open func on(handler: @escaping EventObserver) -> EventListener<EventTuple> {
+        return self.emitter.on(handler)
     }
     
     open var description: String {

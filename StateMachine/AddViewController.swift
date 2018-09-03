@@ -18,15 +18,18 @@ class AddViewController: UIViewController, StateMachineObserver {
     @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var addUpdateButton: UIButton!
     
+    var listenHandl: EventListener<StateMachine<AppState, NumberAddStore, AppEvent>.EventTuple>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textView.text = ""
         self.textView.delegate = self
         self.numberAddApp.performOperation {
-            let _ = self.numberAddApp.stateMachine.addChangeObserver({ (event, current, next, store) in
+            /*let _ = self.numberAddApp.stateMachine.addChangeObserver({ (event, current, next, store) in
                 self.observeChange(event: event, current: current, next: next, store: store)
-            })
+            })*/
+            
+            self.listenHandl = self.numberAddApp.stateMachine.on(handler: self.observeChange)
         }
         
         // Do any additional setup after loading the view.
