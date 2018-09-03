@@ -19,7 +19,7 @@ import Foundation
  State machine is excelent concept of application development. Here whole application is composed into
  serveral unique states which is represented by state variable,(i.e. Store). Events triggered state transition. StateMachine framework provides excelent development tool to develop application based on state machine. This Swift (3.0) framework is a generic reusable code component. Generic represenattion of Event, StateIdentifier or StateName and State behavior can be achived through this frame work.
  
- #### Please build StateMachine project to run this tutorial 
+ #### Please build StateMachine project to run this tutorial
  */
 
 /**
@@ -94,7 +94,7 @@ open class StateConfiguration<S: StateIdentifier,St, E: EventDescriptor>  {
         self.state = state
     }
     
-    open func operation(_ event: StateConfiguration.Event, _ store: StateConfiguration.Store?,_ data: Any? , _ completion: Completion) {
+    open func operation(_ event: StateConfiguration.Event, _ store: StateConfiguration.Store?,_ data: Any? , _ completion:@escaping Completion) {
         
     }
     
@@ -188,9 +188,9 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         }
     }
     // Event completion function
-    internal func completion(next: StateId, store: Any?) {
+    internal func completion(next: StateId, store: Any?,_ immediate: Bool = false) {
         //print("Complete ---- next \(next)")
-        if let q: OperationQueue = self.queue {
+        if let q: OperationQueue = self.queue, immediate == false {
             q.addOperation({ [weak self] in
                 //print("------")
                 self?.processing = false
@@ -252,8 +252,8 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
     
     /**
      ### lastEvent
-            Last event processed by SM
-    */
+     Last event processed by SM
+     */
     open var lastEvent: Event? {
         return historyEvents.last?.event
     }
@@ -300,18 +300,19 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
      Handling event associated with application.
      */
     @discardableResult
-    open func handleEvent(_ event: Event,_ data: Any?) -> Bool {
+    open func handleEvent(_ event: Event,_ data: Any?,_ immediate: Bool = false) -> Bool {
         
         
         if let current: StateId = self.currentState,let handle = states[current] {
             var accepted: Bool = false
             //print("get handel for \(currentState)")
             if let state: StateObj = handle as? StateObj {
-                processing =  true
-                accepted = true
-                if let q: OperationQueue = self.queue {
+                if let q: OperationQueue = self.queue, immediate == false {
+                    // Not accepting event if state machine is sync
+                    processing =  true
+                    accepted = true
                     historyEvents.append((event, Date()))
-                    q.addOperation({ 
+                    q.addOperation({
                         state.operation(event, self.store, data ,{ [weak self](next, store) in
                             self?.completion(next: next, store: store)
                         })
@@ -327,7 +328,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                     
                     historyEvents.append((event, Date()))
                     state.operation(event, self.store, data, { [weak self](next, store) in
-                        self?.completion(next: next, store: store)
+                        self?.completion(next: next, store: store, immediate)
                     })
                 }
                 
@@ -335,11 +336,10 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
             }
             else if let action: StateAction = handle as? StateAction {
                 
-                
-                // Not accepting event if state machine is sync
-                processing = true
-                accepted = true
-                if let q: OperationQueue = self.queue {
+                if let q: OperationQueue = self.queue, immediate == false {
+                    // Not accepting event if state machine is sync
+                    processing = true
+                    accepted = true
                     historyEvents.append((event, Date()))
                     q.addOperation({
                         action(event, self.store, data, {[weak self] (next, store) in
@@ -356,7 +356,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
                     
                     historyEvents.append((event, Date()))
                     action(event, self.store, data, {[weak self] (next, store) in
-                        self?.completion(next: next, store: store)
+                        self?.completion(next: next, store: store, immediate)
                     })
                 }
             }
@@ -366,7 +366,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
             }
             
             //print(" \(count1) : \(historyEvents.count)")
-           return accepted
+            return accepted
         }
         else {
             processing = false
@@ -410,6 +410,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         observers.removeValue(forKey: key)
     }
     
+    @discardableResult
     open func addChangeObserver(_ observer: @escaping ChangeObserver) -> StateObservationHandle {
         let count = observerCount
         observerCount += 1
