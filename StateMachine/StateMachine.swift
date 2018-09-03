@@ -278,6 +278,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
         }
     }
     
+    @discardableResult
     open func handleEventAsync(_ event: Event, _ data: Any?) -> Bool {
         if let q: OperationQueue = self.queue {
             OperationQueue.main.addOperation({ [weak self] in
@@ -298,6 +299,7 @@ open class StateMachine <StateId: StateNames,Store, Event: EventDescriptor>: Cus
      ### handleEvent
      Handling event associated with application.
      */
+    @discardableResult
     open func handleEvent(_ event: Event,_ data: Any?) -> Bool {
         
         
